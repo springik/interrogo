@@ -1,0 +1,11 @@
+/home/springik/RiderProjects/interrogo/Core/bin/Debug/net10.0/Core.deps.json
+/home/springik/RiderProjects/interrogo/Core/bin/Debug/net10.0/Core.dll
+/home/springik/RiderProjects/interrogo/Core/bin/Debug/net10.0/Core.pdb
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.AssemblyInfoInputs.cache
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.AssemblyInfo.cs
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.csproj.CoreCompileInputs.cache
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.dll
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/refint/Core.dll
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.pdb
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/ref/Core.dll

@@ -1,0 +1,75 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using Core.Entities
+@using Core.Interfaces
+@inject IEventRepository EventRepository
+
+<PageTitle>Interrogo - Home</PageTitle>
+
+<h1>My Events</h1>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="CreateDummyEvent">
+        + Create a testing event
+    </button>
+</div>
+
+@if (_events == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!_events.Any())
+{
+    <p>Wow no events. Such empty!</p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Event code</th>
+            <th>Title</th>
+            <th>Created on</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var evt in _events)
+            {
+                <tr>
+                    <td><strong>@evt.EventCode</strong></td>
+                    <td>@evt.Title</td>
+                    <td>@evt.CreatedAt.ToLocalTime().ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Event>? _events;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadEventsAsync();
+    }
+
+    private async Task LoadEventsAsync()
+    {
+        _events = await EventRepository.GetAllAsync();
+    }
+
+    private async Task CreateDummyEvent()
+    {
+        var randomCode = $"NSQL-{Random.Shared.Next(1000, 9999)}";
+
+        var newEvent = new Event
+        {
+            EventCode = randomCode,
+            Title = "Testovací přednáška NoSQL",
+        };
+        
+        await EventRepository.CreateAsync(newEvent);
+        
+        await LoadEventsAsync();
+    }
+}

@@ -1,0 +1,42 @@
+﻿services:
+  interrogo-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: interrogo_web
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDb=mongodb://mongodb:27017/interrogo
+      - ConnectionStrings__Redis=redis:6379
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - interrogo-network
+  
+  mongodb:
+    image: mongo:latest
+    container_name: interrogo_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - interrogo-network
+  
+  redis:
+    image: redis:latest
+    container_name: interrogo_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - interrogo-network
+
+volumes:
+  mongo_data:
+
+networks:
+  interrogo-network:
+    driver: bridge

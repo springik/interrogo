@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "vMdyfQSab3E=",
+  "success": true,
+  "projectFilePath": "/home/springik/RiderProjects/interrogo/Web/Web.csproj",
+  "expectedPackageFiles": [
+    "/home/springik/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
+    "/home/springik/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.12/microsoft.aspnetcore.app.internal.assets.10.0.12.nupkg.sha512",
+    "/home/springik/.nuget/packages/mongodb.bson/3.12.0/mongodb.bson.3.12.0.nupkg.sha512",
+    "/home/springik/.nuget/packages/mongodb.driver/3.12.0/mongodb.driver.3.12.0.nupkg.sha512",
+    "/home/springik/.nuget/packages/respite/3.3.1/respite.3.3.1.nupkg.sha512",
+    "/home/springik/.nuget/packages/sharpcompress/0.48.1/sharpcompress.0.48.1.nupkg.sha512",
+    "/home/springik/.nuget/packages/snappier/1.3.1/snappier.1.3.1.nupkg.sha512",
+    "/home/springik/.nuget/packages/stackexchange.redis/3.3.1/stackexchange.redis.3.3.1.nupkg.sha512",
+    "/home/springik/.nuget/packages/system.io.hashing/10.0.12/system.io.hashing.10.0.12.nupkg.sha512",
+    "/home/springik/.nuget/packages/zstdsharp.port/0.7.3/zstdsharp.port.0.7.3.nupkg.sha512"
+  ],
+  "logs": []
+}

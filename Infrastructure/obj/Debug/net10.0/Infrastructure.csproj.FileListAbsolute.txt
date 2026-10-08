@@ -1,0 +1,15 @@
+/home/springik/RiderProjects/interrogo/Infrastructure/bin/Debug/net10.0/Infrastructure.deps.json
+/home/springik/RiderProjects/interrogo/Infrastructure/bin/Debug/net10.0/Infrastructure.dll
+/home/springik/RiderProjects/interrogo/Infrastructure/bin/Debug/net10.0/Infrastructure.pdb
+/home/springik/RiderProjects/interrogo/Infrastructure/bin/Debug/net10.0/Core.dll
+/home/springik/RiderProjects/interrogo/Infrastructure/bin/Debug/net10.0/Core.pdb
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.csproj.AssemblyReference.cache
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.AssemblyInfoInputs.cache
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.AssemblyInfo.cs
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.csproj.CoreCompileInputs.cache
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastr.15EFFBFE.Up2Date
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.dll
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/refint/Infrastructure.dll
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/Infrastructure.pdb
+/home/springik/RiderProjects/interrogo/Infrastructure/obj/Debug/net10.0/ref/Infrastructure.dll
