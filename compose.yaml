@@ -10,6 +10,7 @@
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__MongoDb=mongodb://mongodb:27017/interrogo
       - ConnectionStrings__Redis=redis:6379
+      - ConnectionStrings__Neo4j=bolt://neo4j:7487
     depends_on:
       - mongodb
       - redis
@@ -33,9 +34,23 @@
       - "6379:6379"
     networks:
       - interrogo-network
+  
+  neo4j:
+    image: neo4j:latest
+    container_name: interrogo_neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/qQsFSo3q30EdqvZOM6zX
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    networks:
+     - interrogo-network
 
 volumes:
   mongo_data:
+  neo4j_data:
 
 networks:
   interrogo-network:

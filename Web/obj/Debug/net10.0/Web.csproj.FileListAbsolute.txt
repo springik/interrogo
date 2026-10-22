@@ -83,8 +83,6 @@
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/prox3i9mme-{0}-63fj8s7r0e-63fj8s7r0e.gz
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/uxr18qbbpx-{0}-0j3bgjxly4-0j3bgjxly4.gz
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/wn7tfq2zxw-{0}-cyz5k529gx-cyz5k529gx.gz
-/home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/dvmvd6hs63-{0}-9hsif5t8mt-9hsif5t8mt.gz
-/home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/9dvhe18ksu-{0}-dwu72t6gfx-dwu72t6gfx.gz
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/w0u4xjpyxz-{0}-obwb3w2bs7-obwb3w2bs7.gz
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/k89rhi3gy1-{0}-obwb3w2bs7-obwb3w2bs7.gz
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/staticwebassets.build.json
@@ -98,3 +96,6 @@
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/Web.pdb
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/Web.genruntimeconfig.cache
 /home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/ref/Web.dll
+/home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/Web.sourcelink.json
+/home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/dvmvd6hs63-{0}-cd06xom9c5-cd06xom9c5.gz
+/home/springik/RiderProjects/interrogo/Web/obj/Debug/net10.0/compressed/9dvhe18ksu-{0}-vmftroxvhh-vmftroxvhh.gz

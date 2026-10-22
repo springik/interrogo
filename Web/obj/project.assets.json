@@ -15,7 +15,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.App.Internal.Assets/10.0.12": {
+      "Microsoft.AspNetCore.App.Internal.Assets/10.0.13": {
         "type": "package",
         "build": {
           "build/Microsoft.AspNetCore.App.Internal.Assets.props": {},
@@ -54,6 +54,19 @@
         },
         "runtime": {
           "lib/net6.0/MongoDB.Driver.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Neo4j.Driver/6.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Neo4j.Driver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Neo4j.Driver.dll": {
             "related": ".xml"
           }
         }
@@ -150,6 +163,7 @@
         "dependencies": {
           "Core": "1.0.0",
           "MongoDB.Driver": "3.12.0",
+          "Neo4j.Driver": "6.4.0",
           "StackExchange.Redis": "3.3.1"
         },
         "compile": {
@@ -186,10 +200,10 @@
         "lib/netstandard2.1/DnsClient.xml"
       ]
     },
-    "Microsoft.AspNetCore.App.Internal.Assets/10.0.12": {
-      "sha512": "+sIBo9AMBZH46qHWHQdfzcGMt+RuBaPYrUMOAM9VjA7MQ9QtIez3lq1C3E05+Yroa94KKt3DSWaxmCI4H28a9Q==",
+    "Microsoft.AspNetCore.App.Internal.Assets/10.0.13": {
+      "sha512": "Y2cXnMnqht5fvja2H8kkr5WA2fYItIPwXiBVo83+/9oySuKZCrz4T+yyZRFtLpxxDScvtYDt7e+J0eNElJ+AiA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.app.internal.assets/10.0.12",
+      "path": "microsoft.aspnetcore.app.internal.assets/10.0.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -205,7 +219,7 @@
         "build/Microsoft.AspNetCore.App.Internal.Assets.targets",
         "buildMultiTargeting/Microsoft.AspNetCore.App.Internal.Assets.targets",
         "buildTransitive/Microsoft.AspNetCore.App.Internal.Assets.targets",
-        "microsoft.aspnetcore.app.internal.assets.10.0.12.nupkg.sha512",
+        "microsoft.aspnetcore.app.internal.assets.10.0.13.nupkg.sha512",
         "microsoft.aspnetcore.app.internal.assets.nuspec"
       ]
     },
@@ -245,6 +259,24 @@
         "mongodb.driver.3.12.0.nupkg.sha512",
         "mongodb.driver.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "Neo4j.Driver/6.4.0": {
+      "sha512": "y4HRrzUL3B3TxOMhF7BFgm7mAQxXporngAx+MN3KrR73T8Von316tkzcP+8knmfqlEFlfJ9y5QaM/l4j3gvn/A==",
+      "type": "package",
+      "path": "neo4j.driver/6.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Neo4j-icon-color.png",
+        "lib/net10.0/Neo4j.Driver.dll",
+        "lib/net10.0/Neo4j.Driver.xml",
+        "lib/net8.0/Neo4j.Driver.dll",
+        "lib/net8.0/Neo4j.Driver.xml",
+        "lib/net9.0/Neo4j.Driver.dll",
+        "lib/net9.0/Neo4j.Driver.xml",
+        "neo4j.driver.6.4.0.nupkg.sha512",
+        "neo4j.driver.nuspec"
       ]
     },
     "RESPite/3.3.1": {
@@ -393,7 +425,7 @@
     "net10.0": [
       "Core >= 1.0.0",
       "Infrastructure >= 1.0.0",
-      "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.12"
+      "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.13"
     ]
   },
   "packageFolders": {
@@ -451,7 +483,7 @@
           "Microsoft.AspNetCore.App.Internal.Assets": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.13, )",
             "autoReferenced": true
           }
         },
@@ -474,7 +506,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.112/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.113/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

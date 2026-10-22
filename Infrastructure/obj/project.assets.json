@@ -119,6 +119,19 @@
           }
         }
       },
+      "Neo4j.Driver/6.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Neo4j.Driver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Neo4j.Driver.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "RESPite/3.3.1": {
         "type": "package",
         "compile": {
@@ -432,6 +445,24 @@
         "packageIcon.png"
       ]
     },
+    "Neo4j.Driver/6.4.0": {
+      "sha512": "y4HRrzUL3B3TxOMhF7BFgm7mAQxXporngAx+MN3KrR73T8Von316tkzcP+8knmfqlEFlfJ9y5QaM/l4j3gvn/A==",
+      "type": "package",
+      "path": "neo4j.driver/6.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Neo4j-icon-color.png",
+        "lib/net10.0/Neo4j.Driver.dll",
+        "lib/net10.0/Neo4j.Driver.xml",
+        "lib/net8.0/Neo4j.Driver.dll",
+        "lib/net8.0/Neo4j.Driver.xml",
+        "lib/net9.0/Neo4j.Driver.dll",
+        "lib/net9.0/Neo4j.Driver.xml",
+        "neo4j.driver.6.4.0.nupkg.sha512",
+        "neo4j.driver.nuspec"
+      ]
+    },
     "RESPite/3.3.1": {
       "sha512": "1Ky6rOjP9YjA8eXWWSJDTSRgVQiRXwsKnET+X5hDuONJqq8KbYLQrTUjMg8gsdyKzwj74ivEioTuQd4mVhthdQ==",
       "type": "package",
@@ -575,6 +606,7 @@
       "Microsoft.Extensions.Configuration.Abstractions >= 10.0.12",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 10.0.12",
       "MongoDB.Driver >= 3.12.0",
+      "Neo4j.Driver >= 6.4.0",
       "StackExchange.Redis >= 3.3.1"
     ]
   },
@@ -639,6 +671,10 @@
             "target": "Package",
             "version": "[3.12.0, )"
           },
+          "Neo4j.Driver": {
+            "target": "Package",
+            "version": "[6.4.0, )"
+          },
           "StackExchange.Redis": {
             "target": "Package",
             "version": "[3.3.1, )"
@@ -660,7 +696,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.112/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.113/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

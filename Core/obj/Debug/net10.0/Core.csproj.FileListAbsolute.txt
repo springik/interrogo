@@ -9,3 +9,4 @@
 /home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/refint/Core.dll
 /home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.pdb
 /home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/ref/Core.dll
+/home/springik/RiderProjects/interrogo/Core/obj/Debug/net10.0/Core.sourcelink.json
