@@ -4,6 +4,7 @@
       context: .
       dockerfile: Dockerfile
     container_name: interrogo_web
+    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
@@ -12,32 +13,51 @@
       - ConnectionStrings__Redis=redis:6379
       - ConnectionStrings__Neo4j=bolt://neo4j:7687
     depends_on:
-      - mongodb
-      - redis
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
     networks:
       - interrogo-network
   
   mongodb:
     image: mongo:latest
     container_name: interrogo_mongo
+    restart: unless-stopped
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
     networks:
       - interrogo-network
+    healthcheck:
+      test: 
+        ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
   
   redis:
     image: redis:latest
     container_name: interrogo_redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
     networks:
       - interrogo-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
   
   neo4j:
     image: neo4j:latest
     container_name: interrogo_neo4j
+    restart: unless-stopped
     environment:
       - NEO4J_AUTH=neo4j/qQsFSo3q30EdqvZOM6zX
     ports:
@@ -47,6 +67,16 @@
       - neo4j_data:/data
     networks:
      - interrogo-network
+    healthcheck:
+      test: 
+        [
+          "CMD-SHELL",
+          "cypher-shell -u neo4j -p qQsFSo3q30EdqvZOM6zX 'RETURN 1' || exit 1",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
 
 volumes:
   mongo_data:
