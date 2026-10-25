@@ -10,7 +10,7 @@
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__MongoDb=mongodb://mongodb:27017/interrogo
       - ConnectionStrings__Redis=redis:6379
-      - ConnectionStrings__Neo4j=bolt://neo4j:7487
+      - ConnectionStrings__Neo4j=bolt://neo4j:7687
     depends_on:
       - mongodb
       - redis
