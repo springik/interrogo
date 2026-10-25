@@ -14,6 +14,7 @@ public class Program
             .AddInteractiveServerComponents();
         
         builder.Services.AddInfrastructure(builder.Configuration);
+        //TODO: add key persistency to MongoDB
 
         var app = builder.Build();
 

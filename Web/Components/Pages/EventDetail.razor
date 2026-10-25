@@ -1,0 +1,161 @@
+@page "/event/{EventId}"
+@using Core.Entities
+@using Core.Interfaces
+@rendermode InteractiveServer
+
+@inject IEventRepository EventRepo
+@inject IQuestionRepository QuestionRepo
+@inject IRealTimeVotingService VotingService
+@inject IGraphRecommendationService GraphService
+
+<PageTitle>Event Detail</PageTitle>
+
+@if (_event == null)
+{
+    <p><em>Načítám událost...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h2>@_event.Title</h2>
+            <p class="text-muted">Code: @_event.EventCode | Logged in as: <strong>@_currentUser</strong></p>
+            
+            <div class="mb-4 p-3 bg-light border rounded">
+                <h5>Switch user(for graph testin)</h5>
+                <select class="form-select w-50" @bind="_currentUser" @bind:after="LoadRecommendationsAsync">
+                    <option value="Alice">Alice</option>
+                    <option value="Bob">Bob</option>
+                    <option value="Charlie">Charlie</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <h4>Ask new question</h4>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Your question..." @bind="_newQuestionText">
+                    <input type="text" class="form-control" placeholder="Tag (C#, SQL)" @bind="_newQuestionTag">
+                    <button class="btn btn-success" @onclick="SubmitQuestionAsync">Submit</button>
+                </div>
+            </div>
+            
+            <h4>Top Questions</h4>
+            @foreach (var q in _questionsWithScores)
+            {
+                <div class="card mb-2">
+                    <div class="card-body d-flex justify-content-between align-content-center">
+                        <div>
+                            <strong>@q.Question.Author</strong>
+                            <p class="mb-0">@q.Question.Text</p>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-primary rounded-pill fs-5 me-2">@q.Score votes</span>
+                            <button class="btn btn-outline-primary" @onclick="() => UpvoteAsync(q.Question.Id)">
+                                👍
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <strong>Smart Networking</strong>
+                </div>
+                <div class="card-body">
+                    <p class="small">Similar people(based on your voting)</p>
+                    @if (!_recommendations.Any())
+                    {
+                        <p class="text-muted">We haven' t gathered enough data for recommendations. Vote more!</p>
+                    }
+                    else
+                    {
+                        <ul class="list-group">
+                            @foreach (var rec in _recommendations)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-content-center">
+                                    @rec.UserId
+                                    <span class="badge bg-info rounded-pill">@rec.SharedTagsCount shared topics</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string EventId { get; set; } = String.Empty;
+
+    private Event? _event;
+    private string _currentUser = "Alice";
+    private string _newQuestionText = string.Empty;
+    private string _newQuestionTag = string.Empty;
+    
+    private record QuestionWithScore(Question Question, int Score);
+    private List<QuestionWithScore> _questionsWithScores = new();
+    
+    private IEnumerable<UserRecommendation> _recommendations = Array.Empty<UserRecommendation>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _event = await EventRepo.GetIdAsync(EventId);
+        if (_event == null)
+            await RefreshDataAsync();
+    }
+
+    private async Task SubmitQuestionAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_newQuestionText))
+            return;
+
+        var newQuestion = new Question
+        {
+            EventId = EventId,
+            Author = _currentUser,
+            Text = _newQuestionText,
+        };
+        await QuestionRepo.CreateAsync(newQuestion);
+        
+        if(!string.IsNullOrWhiteSpace(_newQuestionTag))
+            await GraphService.RegisterQuestionTagAsync(newQuestion.Id, _newQuestionTag.Trim());
+        
+        _newQuestionText = string.Empty;
+        _newQuestionTag = string.Empty;
+        await RefreshDataAsync();
+    }
+
+    private async Task UpvoteAsync(string questionId)
+    {
+        await VotingService.UpvoteQuestionAsync(EventId, questionId);
+        await GraphService.RegisterUserUpvoteAsync(_currentUser, questionId);
+        
+        await RefreshDataAsync();
+    }
+
+    private async Task RefreshDataAsync()
+    {
+        var rawQuestions = await QuestionRepo.GetByEventIdAsync(EventId);
+        
+        var tempList = new List<QuestionWithScore>();
+        foreach (var q in rawQuestions)
+        {
+            var score = await VotingService.GetQuestionScoreAsync(EventId, q.Id);
+            tempList.Add(new QuestionWithScore(q, score));
+        }
+        
+        _questionsWithScores = [.. tempList.OrderByDescending(q => q.Score)];
+
+        await LoadRecommendationsAsync();
+    }
+
+    private async Task LoadRecommendationsAsync()
+    {
+        _recommendations = await GraphService.GetSimilarUsersAsync(_currentUser);
+    }
+}

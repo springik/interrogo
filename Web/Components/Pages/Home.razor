@@ -39,6 +39,9 @@ else
                     <td><strong>@evt.EventCode</strong></td>
                     <td>@evt.Title</td>
                     <td>@evt.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td>
+                        <a href="/event/@evt.Id" class="btn btn-sm btn-primary">Open</a>
+                    </td>
                 </tr>
             }
         </tbody>
