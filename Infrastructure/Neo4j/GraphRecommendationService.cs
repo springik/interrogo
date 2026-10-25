@@ -48,7 +48,7 @@ public class GraphRecommendationService : IGraphRecommendationService
             MATCH (t)<-[:HAS_TAG]-(:Question)<-[:UPVOTED]-(otherUser:User)
             WHERE me <> otherUser
             RETURN otherUser.id as UserId, count(t) as SharedTagsCount
-            ORDER BY SharedTagCount DESC
+            ORDER BY SharedTagsCount DESC
             LIMIT $limit";
         
         await using var session = _driver.AsyncSession();
