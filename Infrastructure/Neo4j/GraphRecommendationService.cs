@@ -4,7 +4,7 @@ using Neo4j.Driver;
 
 namespace Infrastructure.Neo4j;
 
-public class GraphRecommendationService : IGraphRecommendationService, IAsyncDisposable
+public class GraphRecommendationService : IGraphRecommendationService
 {
     private readonly IDriver _driver;
 
@@ -63,10 +63,5 @@ public class GraphRecommendationService : IGraphRecommendationService, IAsyncDis
         });
         
         return result;
-    }
-
-    public ValueTask DisposeAsync()
-    {
-        return _driver.DisposeAsync();
     }
 }
