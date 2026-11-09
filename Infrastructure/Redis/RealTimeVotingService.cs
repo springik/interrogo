@@ -13,7 +13,34 @@ public class RealTimeVotingService : IRealTimeVotingService
     }
     
     private string GetEventKey(string eventId) => $"event:{eventId}:questions";
-    
+    private string GetVotersKey(string eventId, string questionId) => $"event:{eventId}:question:{questionId}:voters";
+
+    public async Task<bool> ToggleUpvoteAsync(string eventId, string questionId, string userId)
+    {
+        var votersKey = GetVotersKey(eventId, questionId);
+        
+        // Key exists => true
+        // key does not exist => false
+        var wasAdded = await _redisDb.SetAddAsync(votersKey, userId);
+        
+        if (wasAdded)
+        {
+            await _redisDb.SortedSetIncrementAsync(GetEventKey(eventId), questionId, 1);
+        }
+        else
+        {
+            await _redisDb.SetRemoveAsync(votersKey, userId);
+            await _redisDb.SortedSetDecrementAsync(GetEventKey(eventId), questionId, 1);
+        }
+
+        return wasAdded;
+    }
+
+    public async Task<bool> HasUserUpvotedAsync(string eventId, string questionId, string userId)
+    {
+        return await _redisDb.SetContainsAsync(GetVotersKey(eventId, questionId), userId);
+    }
+
     public async Task UpvoteQuestionAsync(string eventId, string questionId)
     {
         await _redisDb.SortedSetIncrementAsync(GetEventKey(eventId), questionId, 1);

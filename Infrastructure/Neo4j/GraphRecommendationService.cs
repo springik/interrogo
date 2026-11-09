@@ -41,6 +41,19 @@ public class GraphRecommendationService : IGraphRecommendationService
         });
     }
 
+    public async Task RemoveUserUpvoteAsync(string userId, string questionId)
+    {
+        var query = @"
+            MATCH (u:User {id: $userId})-[r:UPVOTED]->(q:Question {id: $questionId})
+            DELETE r";
+        
+        await using var session = _driver.AsyncSession();
+        await session.ExecuteWriteAsync(async tx =>
+        {
+            await tx.RunAsync(query, new { userId, questionId });
+        });
+    }
+
     public async Task<IEnumerable<UserRecommendation>> GetSimilarUsersAsync(string userId, int limit = 5)
     {
         var query = @"

@@ -53,8 +53,8 @@ else
                         </div>
                         <div class="text-end">
                             <span class="badge bg-primary rounded-pill fs-5 me-2">@q.Score votes</span>
-                            <button class="btn btn-outline-primary" @onclick="() => UpvoteAsync(q.Question.Id)">
-                                👍
+                            <button class="btn btn-outline-primary" @onclick="() => ToggleUpvoteAsync(q.Question.Id)">
+                                @(q.HasCurrentUserUpvoted ? "👍 Upvoted" : "👍 Upvote")
                             </button>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ else
     private string _newQuestionText = string.Empty;
     private string _newQuestionTag = string.Empty;
     
-    private record QuestionWithScore(Question Question, int Score);
+    private record QuestionWithScore(Question Question, int Score, bool HasCurrentUserUpvoted);
     private List<QuestionWithScore> _questionsWithScores = new();
     
     private IEnumerable<UserRecommendation> _recommendations = Array.Empty<UserRecommendation>();
@@ -155,6 +155,19 @@ else
         SyncService.NotifyEventChanged(EventId);
     }
 
+    private async Task ToggleUpvoteAsync(string questionId)
+    {
+        bool isNowUpvoted = await VotingService.ToggleUpvoteAsync(EventId, questionId, _currentUser);
+        
+        if (isNowUpvoted)
+            await GraphService.RegisterUserUpvoteAsync(_currentUser, questionId);
+        else
+            await GraphService.RemoveUserUpvoteAsync(_currentUser, questionId);
+
+        await RefreshDataAsync();
+        SyncService.NotifyEventChanged(EventId);
+    }
+
     private async Task RefreshDataAsync()
     {
         var rawQuestions = await QuestionRepo.GetByEventIdAsync(EventId);
@@ -163,7 +176,8 @@ else
         foreach (var q in rawQuestions)
         {
             var score = await VotingService.GetQuestionScoreAsync(EventId, q.Id);
-            tempList.Add(new QuestionWithScore(q, score));
+            var hasUpvoted = await VotingService.HasUserUpvotedAsync(EventId, q.Id, _currentUser);
+            tempList.Add(new QuestionWithScore(q, score, hasUpvoted));
         }
         
         _questionsWithScores = [.. tempList.OrderByDescending(q => q.Score)];
