@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "FZwyJ9NMRtI=",
+  "dgSpecHash": "BTXFKGx7DGs=",
   "success": true,
   "projectFilePath": "/home/springik/RiderProjects/interrogo/Web/Web.csproj",
   "expectedPackageFiles": [
     "/home/springik/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
-    "/home/springik/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.13/microsoft.aspnetcore.app.internal.assets.10.0.13.nupkg.sha512",
+    "/home/springik/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.14/microsoft.aspnetcore.app.internal.assets.10.0.14.nupkg.sha512",
     "/home/springik/.nuget/packages/mongodb.bson/3.12.0/mongodb.bson.3.12.0.nupkg.sha512",
     "/home/springik/.nuget/packages/mongodb.driver/3.12.0/mongodb.driver.3.12.0.nupkg.sha512",
     "/home/springik/.nuget/packages/neo4j.driver/6.4.0/neo4j.driver.6.4.0.nupkg.sha512",

@@ -12,8 +12,9 @@
 <h1>My Events</h1>
 
 <div class="mb-3">
-    <button class="btn btn-primary" @onclick="CreateDummyEvent">
-        + Create a testing event
+    <input type="text" class="form-control" placeholder="Event Name (C# Workshop)" @bind="_newEventTitle">
+    <button class="btn btn-primary" @onclick="CreateEventAsync">
+        + Create a new event
     </button>
 </div>
 
@@ -53,6 +54,7 @@ else
 
 @code {
     private IEnumerable<Event>? _events;
+    private string? _newEventTitle = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,6 +71,27 @@ else
     private async Task LoadEventsAsync()
     {
         _events = await EventRepository.GetAllAsync();
+    }
+
+    private async Task CreateEventAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_newEventTitle))
+            return;
+
+        var randomCode = $"INTERR-{Random.Shared.Next(1000, 9999)}";
+        var newEvent = new Event
+        {
+            EventCode = randomCode,
+            Title = _newEventTitle,
+        };
+        
+        
+        await EventRepository.CreateAsync(newEvent);
+        
+        _newEventTitle = string.Empty;
+        
+        await LoadEventsAsync();
+        SyncService.NotifyNewEventCreated();
     }
 
     private async Task CreateDummyEvent()
