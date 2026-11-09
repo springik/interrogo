@@ -1,12 +1,15 @@
 @page "/event/{EventId}"
 @using Core.Entities
 @using Core.Interfaces
+@using Web.Services
 @rendermode InteractiveServer
 
 @inject IEventRepository EventRepo
 @inject IQuestionRepository QuestionRepo
 @inject IRealTimeVotingService VotingService
 @inject IGraphRecommendationService GraphService
+@implements IDisposable
+@inject LiveSyncService SyncService
 
 <PageTitle>Event Detail</PageTitle>
 
@@ -105,8 +108,20 @@ else
     protected override async Task OnInitializedAsync()
     {
         _event = await EventRepo.GetIdAsync(EventId);
-        if (_event == null)
+        if (_event != null)
+        {
             await RefreshDataAsync();
+            SyncService.OnEventChanged += HandleEventChanged;
+        }
+    }
+
+    private async void HandleEventChanged(string changedEventId)
+    {
+        if (changedEventId == EventId)
+        {
+            await RefreshDataAsync();
+            await InvokeAsync(StateHasChanged);
+        }
     }
 
     private async Task SubmitQuestionAsync()
@@ -128,6 +143,7 @@ else
         _newQuestionText = string.Empty;
         _newQuestionTag = string.Empty;
         await RefreshDataAsync();
+        SyncService.NotifyEventChanged(EventId);
     }
 
     private async Task UpvoteAsync(string questionId)
@@ -136,6 +152,7 @@ else
         await GraphService.RegisterUserUpvoteAsync(_currentUser, questionId);
         
         await RefreshDataAsync();
+        SyncService.NotifyEventChanged(EventId);
     }
 
     private async Task RefreshDataAsync()
@@ -158,4 +175,10 @@ else
     {
         _recommendations = await GraphService.GetSimilarUsersAsync(_currentUser);
     }
+
+    public void Dispose()
+    {
+        SyncService.OnEventChanged -= HandleEventChanged;
+    }
+
 }

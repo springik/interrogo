@@ -1,5 +1,6 @@
 using Web.Components;
 using Infrastructure.Extensions;
+using Web.Services;
 
 namespace Web;
 
@@ -14,7 +15,8 @@ public class Program
             .AddInteractiveServerComponents();
         
         builder.Services.AddInfrastructure(builder.Configuration);
-        //TODO: add key persistency to MongoDB
+        //TODO: add key persistency to MongoDB(maybe)
+        builder.Services.AddSingleton<LiveSyncService>();
 
         var app = builder.Build();
 

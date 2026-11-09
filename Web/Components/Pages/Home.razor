@@ -2,7 +2,10 @@
 @rendermode InteractiveServer
 @using Core.Entities
 @using Core.Interfaces
+@using Web.Services
 @inject IEventRepository EventRepository
+@implements IDisposable
+@inject LiveSyncService SyncService
 
 <PageTitle>Interrogo - Home</PageTitle>
 
@@ -54,6 +57,13 @@ else
     protected override async Task OnInitializedAsync()
     {
         await LoadEventsAsync();
+        SyncService.OnNewEventCreated += HandleNewEventCreated;
+    }
+
+    private async void HandleNewEventCreated()
+    {
+        await LoadEventsAsync();
+        await InvokeAsync(StateHasChanged);
     }
 
     private async Task LoadEventsAsync()
@@ -75,4 +85,10 @@ else
         
         await LoadEventsAsync();
     }
+
+    public void Dispose()
+    {
+        SyncService.OnNewEventCreated -= HandleNewEventCreated;
+    }
+
 }
